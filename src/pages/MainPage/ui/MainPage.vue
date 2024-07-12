@@ -1,5 +1,5 @@
 <script>
-import Todos from "@/components/Todos.vue";
+import Todos from "@/entities/Todo/ui/Todos.vue";
 import {defineComponent} from "vue";
 
 export default defineComponent({
@@ -9,6 +9,5 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1>MainPage</h1>
   <Todos/>
 </template>
