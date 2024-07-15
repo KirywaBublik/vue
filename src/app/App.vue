@@ -5,8 +5,7 @@ import Header from "@/widgets/Header";
 
 <template>
   <div class="flex flex-col min-h-screen">
-    <Header/>
-    <Footer/>
+    <Header />
+    <Footer />
   </div>
 </template>
-

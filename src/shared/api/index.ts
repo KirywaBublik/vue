@@ -1,3 +1,7 @@
-import {dataFetch} from "@/shared/api/fetchDataHandler";
+import type {
+  userType,
+  dataProp,
+  dataPropWithPagination,
+} from "./model/requestType";
 
-export default dataFetch
+export type { userType, dataProp, dataPropWithPagination };

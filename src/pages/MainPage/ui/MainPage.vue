@@ -1,13 +1,12 @@
 <script>
-import Todos from "@/entities/Todo/ui/Todos.vue";
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
+import Product from "@/entities/Product/";
 
 export default defineComponent({
-  components: {Todos}
-})
-
+  components: { Product },
+});
 </script>
 
 <template>
-  <Todos/>
+  <Product />
 </template>
