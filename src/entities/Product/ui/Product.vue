@@ -1,8 +1,19 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { defineAsyncComponent, onMounted, ref } from "vue";
 import type { dataProp } from "@/shared/api";
 import { dataFetch } from "@/shared/api/request/fetchDataHandler";
-import ProductList from "@/features/Product/ProductList/ui/ProductList.vue";
+import loading from "@/entities/Product/ui/loading.vue";
+import error from "@/entities/Product/ui/error.vue";
+
+const ProductList = defineAsyncComponent({
+  loader: () => import("@/features/Product/ProductList/ui/ProductList.vue"),
+
+  loadingComponent: loading,
+  delay: 200,
+
+  errorComponent: error,
+  timeout: 200,
+});
 
 let data = ref<dataProp[]>([]);
 let currentPage = ref(1);

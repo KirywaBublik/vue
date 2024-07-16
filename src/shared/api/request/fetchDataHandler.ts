@@ -49,7 +49,7 @@ export const fetchUserProfile = async (query: string) => {
     }
   }
 };
-// TODO
+// TODO улучшить и довести до ума
 export const dataSubmitRegister = async () => {
   const response = await axios.post(
     "https://affdf12e9349600c.mokky.dev/register",

@@ -2,9 +2,9 @@
 import { dataSubmit } from "@/shared/api/request/fetchDataHandler";
 import { ref } from "vue";
 import Input from "@/shared/ui/Input/ui/Input.vue";
-// TODO
+// TODO улучшить
 const auth = "auth";
-// TODO
+// TODO улучшить
 const data = ref({
   email: ref<string>(""),
   password: ref<string>(""),

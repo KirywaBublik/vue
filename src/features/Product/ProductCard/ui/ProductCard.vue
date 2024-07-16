@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import router from "@/app/routes/router";
+import router from "@/app/providers/routes/router";
 import image from "@/shared/assets";
 import { dataFetch } from "@/shared/api/request/fetchDataHandler";
 
