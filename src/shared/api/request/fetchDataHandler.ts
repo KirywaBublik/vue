@@ -1,67 +1,43 @@
-import axios from "axios";
-import { getToken, setToken } from "@/shared/lib/";
-import type { dataPropWithPagination, userType } from "@/shared/api";
-import { data } from "@/pages/RegisterPage/model/constants";
+import axios, { type AxiosResponse } from "axios";
+import type { ResponseData } from "@/shared/api/model/requestType";
 
 const BASE_URL = "https://affdf12e9349600c.mokky.dev/";
 
-const token = getToken("token");
-
-export const dataFetch = async (
-  query: string,
-): Promise<dataPropWithPagination | undefined> => {
+export const dataFetch = async (query: string) => {
   try {
-    const response = await axios.get<dataPropWithPagination>(
-      `${BASE_URL}/${query}`,
-    );
+    const response = await axios.get(`${BASE_URL}/${query}`);
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const dataSubmit = async (query: string, data: any) => {
+export const dataSubmit = async (
+  query: string,
+  data: any,
+): Promise<AxiosResponse<ResponseData> | any> => {
   try {
-    const response = await axios.post(`${BASE_URL}${query}`, {
+    return await axios.post<ResponseData>(`${BASE_URL}${query}`, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       ...data,
     });
-    setToken("token", response.data.token);
   } catch (error) {
     console.log(error);
   }
 };
 
-export const fetchUserProfile = async (query: string) => {
-  if (token) {
-    try {
-      const response = await axios.get<userType>(`${BASE_URL}${query}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setToken("name", response.data.fullName);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-};
-// TODO улучшить и довести до ума
-export const dataSubmitRegister = async () => {
-  const response = await axios.post(
-    "https://affdf12e9349600c.mokky.dev/register",
-    {
+export const fetchUserProfile = async (query: string, token: string | null) => {
+  try {
+    const response = await axios.get(`${BASE_URL}${query}`, {
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      fullName: data.value[0].model,
-      email: data.value[1].model,
-      password: data.value[2].model,
-    },
-  );
-  setToken("token", response.data.token);
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };

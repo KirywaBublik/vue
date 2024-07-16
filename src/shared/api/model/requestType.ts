@@ -1,12 +1,3 @@
-import type { Ref } from "vue";
-
-export interface userType {
-  fullName: string;
-  email: string;
-  password: string;
-  id: number;
-  token?: string;
-}
 export interface dataProp {
   id: number;
   title: string;
@@ -25,9 +16,15 @@ export interface dataPropWithPagination {
   items: dataProp[];
 }
 
-export interface registerType {
-  id: number;
-  name: string;
-  model: Ref<string>;
-  label: string;
+export interface ResponseData {
+  token?: string;
+  data: {
+    headers: {
+      Accept: string;
+      "Content-Type": string;
+    };
+    fullName: string;
+    email: string;
+    id: number;
+  };
 }

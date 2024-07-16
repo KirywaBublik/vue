@@ -1,5 +1,7 @@
 <script setup lang="ts"></script>
 
-<template>loading</template>
+<template>
+  <p>loading</p>
+</template>
 
 <style scoped></style>

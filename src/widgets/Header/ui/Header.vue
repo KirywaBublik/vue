@@ -1,23 +1,20 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { fetchUserProfile } from "@/shared/api/request/fetchDataHandler";
-import {
-  clearToken,
-  getToken,
-} from "@/shared/lib/localStorageHandler/localStorageHandler";
+import { useUserStore } from "@/app/providers/stores/User";
+import Basket from "@/entities/Basket/Basket.vue";
+import { getToken } from "@/shared/lib";
+import { onMounted } from "vue";
+import { useBasketStore } from "@/app/providers/stores/Basket";
 
-onMounted(() => {
-  fetchUserProfile("auth_me");
-});
+const user = useUserStore();
+const basket = useBasketStore();
 
-const token = ref(getToken("token"));
+const token = getToken("token");
 
-const name = ref(getToken("name"));
-
-const logOutFunc = () => {
-  clearToken("token");
-  clearToken("name");
-};
+if (token) {
+  onMounted(async () => {
+    await user.getUserInfo("auth_me", token);
+  });
+}
 </script>
 
 <template>
@@ -29,7 +26,7 @@ const logOutFunc = () => {
       <div class="space-x-4">
         <RouterLink to="/" class="hover:underline">Go to Home</RouterLink>
         <RouterLink to="/about" class="hover:underline">Go to About</RouterLink>
-        <div class="space-x-4" v-if="!token">
+        <div class="space-x-4" v-if="!user.isAuth">
           <RouterLink to="/login" class="hover:underline"
             >Go to Login</RouterLink
           >
@@ -38,8 +35,12 @@ const logOutFunc = () => {
           >
         </div>
         <div class="space-x-4" v-else>
-          {{ name }}
-          <button @click="logOutFunc">LogOut</button>
+          {{ user.fullName }}
+          <button @click="user.logout()">LogOut</button>
+          <br /><br />
+          <RouterLink v-if="basket.items.length" to="/basket">
+            <Basket />
+          </RouterLink>
         </div>
       </div>
     </nav>

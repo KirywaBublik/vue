@@ -2,18 +2,21 @@
 import { defineAsyncComponent, onMounted, ref } from "vue";
 import type { dataProp } from "@/shared/api";
 import { dataFetch } from "@/shared/api/request/fetchDataHandler";
-import loading from "@/entities/Product/ui/loading.vue";
-import error from "@/entities/Product/ui/error.vue";
-
+import Loading from "@/pages/Loading/Loading.vue";
+import Error from "@/pages/Error/Error.vue";
+import { useBasketStore } from "@/app/providers/stores/Basket";
+// Todo
 const ProductList = defineAsyncComponent({
   loader: () => import("@/features/Product/ProductList/ui/ProductList.vue"),
 
-  loadingComponent: loading,
+  loadingComponent: Loading,
   delay: 200,
 
-  errorComponent: error,
-  timeout: 200,
+  errorComponent: Error,
+  timeout: 2000,
 });
+
+const basket = useBasketStore();
 
 let data = ref<dataProp[]>([]);
 let currentPage = ref(1);
@@ -41,6 +44,10 @@ function changePage(page: number) {
     fetchData(currentPage.value);
   }
 }
+
+function addToBasket(id: number) {
+  basket.addToBasket(id);
+}
 </script>
 
 <template>
@@ -48,7 +55,11 @@ function changePage(page: number) {
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
     >
-      <ProductList :data="data" :delete-item="deleteItem" />
+      <ProductList
+        :addToBasket="addToBasket"
+        :data="data"
+        :delete-item="deleteItem"
+      />
     </div>
     <div class="container text-center p-10">
       <button @click="changePage(currentPage - 1)">Prev page</button>
