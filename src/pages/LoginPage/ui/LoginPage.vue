@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import Input from "@/shared/ui/Input/ui/Input.vue";
+import Input from "@/shared/ui/Input/ui/MyInput.vue";
 import { useUserStore } from "@/app/providers/stores/User";
 
-// TODO улучшить
-const auth = "auth";
 const user = useUserStore();
 </script>
 
@@ -11,7 +9,7 @@ const user = useUserStore();
   <div class="flex justify-center items-center bg-gray-100 flex-grow">
     <div class="bg-white p-10 shadow-md rounded-lg w-full max-w-md text-center">
       <h2 class="text-2xl font-bold mb-5">Вход</h2>
-      <form @submit.prevent="user.login(auth)">
+      <form @submit.prevent="user.login('auth')">
         <Input label="Почта" v-model="user.email" />
         <Input label="Пароль" v-model="user.password" />
         <button

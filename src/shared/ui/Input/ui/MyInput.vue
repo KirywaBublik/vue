@@ -1,8 +1,7 @@
 <script setup lang="ts">
-// TODO варн без ?
 defineProps<{
-  label?: string;
-  modelValue?: string;
+  label: string;
+  modelValue: string;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);

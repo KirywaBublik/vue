@@ -1,29 +1,36 @@
 <script setup lang="ts">
-import Input from "@/shared/ui/Input/ui/Input.vue";
 import { useUserStore } from "@/app/providers/stores/User";
 import { ref } from "vue";
+import MyInput from "@/shared/ui/Input/ui/MyInput.vue";
 
 const user = useUserStore();
 
 const register = "register";
 // todo
+
+const userData = ref({
+  fullName: "",
+  email: "",
+  password: "",
+});
+
 const data = ref([
   {
     id: 0,
     name: "username",
-    model: (user.fullName = ref("")),
+    model: userData.value.fullName,
     label: "Имя пользователя",
   },
   {
     id: 1,
     name: "email",
-    model: (user.email = ref("")),
+    model: userData.value.email,
     label: "Почта",
   },
   {
     id: 2,
     name: "password",
-    model: (user.password = ref("")),
+    model: userData.value.password,
     label: "Пароль",
   },
 ]);
@@ -34,7 +41,7 @@ const data = ref([
     <div class="bg-white p-10 shadow-md rounded-lg w-full max-w-md text-center">
       <h2 class="text-2xl font-bold mb-5">Регистрация</h2>
       <form @submit.prevent="user.register(register)">
-        <Input
+        <MyInput
           v-for="item in data"
           :key="item.id"
           :label="item.label"

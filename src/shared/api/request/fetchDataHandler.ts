@@ -26,7 +26,7 @@ export const dataSubmit = async (
     });
   } catch (error) {
     console.log(error);
-  }
+  } // todo catch обработать
 };
 
 export const fetchUserProfile = async (query: string, token: string | null) => {

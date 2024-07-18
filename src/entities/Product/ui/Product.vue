@@ -5,7 +5,9 @@ import { dataFetch } from "@/shared/api/request/fetchDataHandler";
 import Loading from "@/pages/Loading/Loading.vue";
 import Error from "@/pages/Error/Error.vue";
 import { useBasketStore } from "@/app/providers/stores/Basket";
-// Todo
+
+// todo - isLoading
+// todo - hook
 const ProductList = defineAsyncComponent({
   loader: () => import("@/features/Product/ProductList/ui/ProductList.vue"),
 
@@ -28,7 +30,7 @@ async function fetchData(page: number) {
     data.value = response.items;
     totalPages.value = response.meta.total_pages;
   }
-}
+} // todo в стор
 
 onMounted(() => {
   fetchData(currentPage.value);

@@ -18,6 +18,7 @@ export const useUserStore = defineStore("user", {
   actions: {
     async login(query: string) {
       const dataFields = {
+        // todo вопрос
         email: this.email,
         password: this.password,
         fullName: this.fullName,
@@ -30,6 +31,7 @@ export const useUserStore = defineStore("user", {
     },
     async register(query: string) {
       const dataFields = {
+        // todo вопрос
         fullName: this.fullName,
         email: this.email,
         password: this.password,
@@ -48,9 +50,9 @@ export const useUserStore = defineStore("user", {
       clearToken("token");
     },
     async getUserInfo(query: string, token: string | null) {
-      const abc = await fetchUserProfile(query, token);
-      this.fullName = abc.fullName;
-      return abc.fullName;
+      const response = await fetchUserProfile(query, token);
+      this.fullName = response.fullName;
+      return response.fullName;
     },
   },
 });

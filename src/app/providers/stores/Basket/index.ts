@@ -16,7 +16,7 @@ export const useBasketStore = defineStore("basket", {
         this.count.push(response);
       }
     },
-  },
+  }, // store todo
   actions: {
     addToBasket(id: number) {
       this.items.push(id);
